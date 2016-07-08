@@ -1,0 +1,115 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>지뢰사정</title>
+</head>
+<body>
+{% for sper in seperate %}
+	<!--{#{forloop.counter}#}  번호를 붙여주는거 개쩜-->
+	{% if playerP.player1position == forloop.counter and playerP.player2position == forloop.counter %}
+		<img src="{% static 'css/player1.png' %}">		
+	{% endif %}
+	{% if playerP.player1Position == forloop.counter %}
+		<img src="{% static 'css/player1.png' %}">
+	{% elif playerP.player2Position == forloop.counter %}
+		<img src="{% static 'css/player2.png' %}">		
+	{% else %}
+		{% if sper.seperMine == 1 %}
+			<img src="{% static 'css/mine.png' %}">
+		{% endif%}
+		{% if sper.seperMine == 0 %}
+			<img src="{% static 'css/nomine.png' %}">
+		{% endif %}
+		{% if sper.seperMine == 2 %}
+			<img src="{% static 'css/final.png' %}">
+		{% endif %}
+	{% endif %}
+	{% if forloop.counter == 10 %}
+		<br>
+	{% elif forloop.counter == 20 %}
+		<br>
+	{% elif forloop.counter == 30 %}
+		<br>
+	{% elif forloop.counter == 40 %}
+		<br>
+	{% elif forloop.counter == 50 %}
+		<br>
+	{% elif forloop.counter == 60 %}
+		<br>
+	{% elif forloop.counter == 70 %}
+		<br>
+	{% elif forloop.counter == 80 %}
+		<br>
+	{% elif forloop.counter == 90 %}
+		<br>
+	{% elif forloop.counter == 100 %}
+		<br>	
+	{% endif %}
+<!--{#	{% if spar.id%10==0 %}#}
+		<br>
+{#	{% endif %}#}  커스텀 템플릿 태그 (줄바꿈 문자를 넣어주어야 한다 . 스크립틀릿 안에서는 연산자 사용 불가 )-->
+{% endfor %}
+<h1>#################################</h1>
+<h1>플레이어 1 위치 : {{playerP.player1Position}} 플레이어 2 위치 : {{playerP.player2Position}} </h1>
+<h1>#################################</h1>
+<br>
+{% if mines.mine == 0 %}
+{% elif mines.mine == 1 %}
+	<h1>{{picks.pick}}은 지뢰입니다 두칸 뒤로 가세요</h1>
+{% endif %}
+{% if dice.dice1 == dice.dice2 and dice.dice1 == none %}
+{% elif dice.dice == dice.dice2 and dice.dice1 == 0 %}
+{% elif dice.dice1 == dice.dice2 %}
+	<h1>더블입니다. 한번더 플레이 하십시오</h1>
+{% endif %}
+{% if orders.order == 1 %}
+	<h1>플레이어 1 순서</h1>
+{% elif orders.order == 0 %}
+	<h1>플레이어 2 순서</h1>
+{% endif %}
+{% if dice.dice1 == 1 %}
+	<img src="{% static 'css/one.png' %}">
+{% elif dice.dice1 == 2 %}
+	<img src="{% static 'css/two.png' %}">
+{% elif dice.dice1 == 3 %}
+	<img src="{% static 'css/three.png' %}">
+{% elif dice.dice1 == 4 %}
+	<img src="{% static 'css/four.png' %}">
+{% elif dice.dice1 == 5 %}
+	<img src="{% static 'css/five.png' %}">
+{% elif dice.dice1 == 6 %}
+	<img src="{% static 'css/six.png' %}">
+{% endif %}
+{% if dice.dice2 == 1 %}
+	<img src="{% static 'css/one.png' %}">
+{% elif dice.dice2 == 2 %}
+	<img src="{% static 'css/two.png' %}">
+{% elif dice.dice2 == 3 %}
+	<img src="{% static 'css/three.png' %}">
+{% elif dice.dice2 == 4 %}
+	<img src="{% static 'css/four.png' %}">
+{% elif dice.dice2 == 5 %}
+	<img src="{% static 'css/five.png' %}">
+{% elif dice.dice2 == 6 %}
+	<img src="{% static 'css/six.png' %}">
+{% endif %}
+
+{% if orders.order == 2 %}
+	{% if playerP.player1Position > playerP.player2Position %}
+		<h1>플레이어 1 승리</h1>
+	{% elif playerP.player2Position > playerP.player1Position %}
+		<h1>플레이어 2 승리</h1>
+	{% endif %}
+{% endif %}
+<form action="/insert">
+	<input type="submit" value="추가하기">
+</form>
+<form action="/passnext">
+	<input type="submit" value="누르기">	
+</form>
+<form action="/deleteaction">
+	<input type="submit" value="삭제하기">	
+</form>
+</body>
+</html>
